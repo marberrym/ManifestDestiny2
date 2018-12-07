@@ -1,0 +1,17 @@
+.navBar {
+    width: 100%;
+    height: 3em;
+    background-color: rgba(0, 0, 0, 0.329);
+    display: flex;
+}
+
+.ghostNav {
+    height: 2.5em;
+    margin-left: 1em;
+    margin-top: .25em;
+    transition: .5s ease-in-out;
+}
+
+.ghostNav:hover {
+    transform: rotate(360deg);
+}
