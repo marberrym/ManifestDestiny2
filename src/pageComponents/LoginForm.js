@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/loginForm.css';
+import APIKey from '../APIKey';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -17,7 +18,17 @@ class LoginForm extends Component {
         } else {
             this.setState({platform: platform})
         }
-    } 
+    }
+    
+    usersearch(user) {
+        fetch(`https://www.bungie.net/Platform/User/SearchUsers?q=${user}`, {
+            headers: {
+                "X-API-Key": APIKey,
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+    }
 
     render() {
         return <div className="loginForm">
@@ -53,13 +64,10 @@ class LoginForm extends Component {
                     }}></i>  
                 }  
             </div>
-            <input type="text" placeholder="Username" value={this.state.username} onChange={
+            <input type="text" placeholder="Search Users" value={this.state.username} onChange={
                 event => this.setState({username: event.target.value})}
             ></input>
-            <input type="password" placeholder="Password" value={this.state.password} onChange={
-                event => this.setState({password: event.target.value})}
-            ></input>
-            <button className="loginBtn">Log In</button>
+            <button className="loginBtn" onClick={event => this.usersearch()}>Search</button>
         </div>
     }
 }
