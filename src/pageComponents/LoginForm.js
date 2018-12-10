@@ -23,8 +23,7 @@ class LoginForm extends Component {
     usersearch(user) {
         fetch(`https://www.bungie.net/Platform/User/SearchUsers?q=${this.state.username}`, {
             headers: {
-                "X-API-Key": APIKey,
-                "Origin": "http://localhost:3000/"  
+                "X-API-Key": APIKey,  
             },
         })
         .then(res => res.json())
