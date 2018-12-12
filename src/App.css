@@ -19,6 +19,12 @@
   transform: translateX(-50%);
 }
 
+.profilePic {
+  height: 100px;
+  width: 100px;
+  border-radius: 4px;
+}
+
 @media only screen and (min-width: 600px) {
   .logo {
     height: 300px;

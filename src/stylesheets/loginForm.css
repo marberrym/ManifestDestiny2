@@ -68,3 +68,20 @@ input {
     border-radius: 2px;
     font-family: 'Orbitron', sans-serif;
 }
+
+.userPanel {
+    display: flex;
+    margin: 1em;
+}
+
+.ps4small {
+    color: blue;
+}
+
+.xboxsmall {
+    color: green;
+}
+
+.pcsmall {
+    color: orange;
+}

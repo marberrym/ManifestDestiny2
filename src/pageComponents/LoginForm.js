@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/loginForm.css';
 import APIKey from '../APIKey';
+import UserPanel from './UserPanel';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class LoginForm extends Component {
         this.state = {
             platform: "",
             username: "",
-            data: {},
+            users: [],
         }
     }
 
@@ -29,7 +30,7 @@ class LoginForm extends Component {
         .then(res => res.json())
         .then(res => {
             console.log(res);
-            this.setState({data: res.Response});
+            this.setState({users: res.Response});
         })
     }
 
@@ -71,6 +72,7 @@ class LoginForm extends Component {
                 event => this.setState({username: event.target.value})}
             ></input>
             <button className="loginBtn" onClick={event => this.usersearch()}>Search</button>
+            {this.state.users.map(user => <UserPanel user={user}/>)}
         </div>
     }
 }
