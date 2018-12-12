@@ -8,7 +8,7 @@ class LoginForm extends Component {
         this.state = {
             platform: "",
             username: "",
-            password: "",
+            data: {},
         }
     }
 
@@ -27,7 +27,10 @@ class LoginForm extends Component {
             },
         })
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res);
+            this.setState({data: res.Response});
+        })
     }
 
     render() {
