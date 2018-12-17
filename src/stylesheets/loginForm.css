@@ -74,6 +74,13 @@ input {
     justify-content: flex-start;
     width: 40%;
     margin: 1em;
+    transition: .3s ease-in-out;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.userPanel:hover {
+    background-color: rgba(128, 128, 128, 0.473);
 }
 
 .ps4small {

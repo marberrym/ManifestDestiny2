@@ -7,7 +7,7 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            platform: "",
+            platform: -1,
             username: "",
             users: [],
             user: [],
@@ -16,14 +16,14 @@ class LoginForm extends Component {
 
     toggle(platform) {
         if (platform === null) {
-            this.setState({platform: ""})
+            this.setState({platform: -1})
         } else {
             this.setState({platform: platform})
         }
     }
     
-    usersearch(user) {
-        fetch(`https://www.bungie.net/Platform/User/SearchUsers?q=${this.state.username}`, {
+    usersearch(platform, username) {
+        fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${username}/`, {
             headers: {
                 "X-API-Key": APIKey,  
             },
@@ -53,41 +53,41 @@ class LoginForm extends Component {
         return <div className="loginForm">
             <div className="platform">
                 {
-                    this.state.platform === "xbox" ?
+                    this.state.platform === 1 ?
                         <i className="xbox fab fa-xbox fa-3x selectxb" onClick={event => {
                             this.toggle()
                         }}></i>
                     :
                         <i className="xbox fab fa-xbox fa-3x" onClick={event => {
-                            this.toggle("xbox")
+                            this.toggle(1)
                         }}></i>
                 }
                 {
-                    this.state.platform === "ps4" ?
+                    this.state.platform === 2 ?
                         <i className="ps4 fab fa-playstation fa-3x selectps" onClick={event => {
                             this.toggle()
                         }}></i>
                     :
                         <i className="ps4 fab fa-playstation fa-3x" onClick={event => {
-                            this.toggle("ps4")
+                            this.toggle(2)
                         }}></i>    
                 }
                 {
-                    this.state.platform === "pc" ?
+                    this.state.platform === 4 ?
                         <i className="pc fab fa-windows fa-3x selectpc" onClick={event => {
                             this.toggle()
                         }}></i>
                     :
-                    <i className="pc fab fa-windows fa-3x" onClick={event => {
-                        this.setState({platform: "pc"})
-                    }}></i>  
+                        <i className="pc fab fa-windows fa-3x" onClick={event => {
+                            this.toggle(4)
+                        }}></i>  
                 }  
             </div>
             <input type="text" placeholder="Search Users" value={this.state.username} onChange={
                 event => this.setState({username: event.target.value})}
             ></input>
-            <button className="loginBtn" onClick={event => this.usersearch()}>Search</button>
-            {this.state.users.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)}
+            <button className="loginBtn" onClick={event => this.usersearch(this.state.platform, this.state.username)}>Search</button>
+            {/* {this.state.users.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)} */}
         </div>
     }
 }
