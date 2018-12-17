@@ -10,6 +10,7 @@ class LoginForm extends Component {
             platform: "",
             username: "",
             users: [],
+            user: [],
         }
     }
 
@@ -32,6 +33,20 @@ class LoginForm extends Component {
             console.log(res);
             this.setState({users: res.Response});
         })
+    }
+
+    getProfile(membership, ID) {
+        fetch(`https://www.bungie.net/Platform/Destiny2/${membership}/Profile/${ID}`, {
+            headers: {
+                "X-API-Key": APIKey,  
+            },
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            this.setState({user: res.Response})
+        })
+
     }
 
     render() {
@@ -72,7 +87,7 @@ class LoginForm extends Component {
                 event => this.setState({username: event.target.value})}
             ></input>
             <button className="loginBtn" onClick={event => this.usersearch()}>Search</button>
-            {this.state.users.map(user => <UserPanel user={user}/>)}
+            {this.state.users.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)}
         </div>
     }
 }

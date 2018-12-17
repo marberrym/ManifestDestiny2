@@ -1,7 +1,7 @@
 import React from 'react';
 
 let UserPanel = (props) =>
-    <div className="userPanel">
+    <div className="userPanel" onClick={event => props.getProfile(2, props.user.membershipId)}>
         <img className="profilePic" src={`https://www.bungie.net/${props.user.profilePicturePath}`} />
         <div>
             <div>{props.user.displayName}</div>

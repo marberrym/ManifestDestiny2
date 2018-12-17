@@ -71,6 +71,8 @@ input {
 
 .userPanel {
     display: flex;
+    justify-content: flex-start;
+    width: 40%;
     margin: 1em;
 }
 
