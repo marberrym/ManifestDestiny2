@@ -31,12 +31,22 @@ class LoginForm extends Component {
         .then(res => res.json())
         .then(res => {
             console.log(res);
-            this.setState({users: res.Response});
+            this.setState({user: res.Response});
+            if (res.Response.length > 0) {
+                fetch(`https://www.bungie.net/Platform/Destiny2/${res.Response[0].membershipType}/Profile/${res.Response[0].membershipId}?components=200`,
+                    {
+                        headers: {
+                            "X-API-Key": APIKey,  
+                        }
+                    })
+                .then(res => res.json())
+                .then(res => console.log(res))
+            }
         })
     }
 
     getProfile(membership, ID) {
-        fetch(`https://www.bungie.net/Platform/Destiny2/${membership}/Profile/${ID}`, {
+        fetch(`https://www.bungie.net/Platform/Destiny2/${membership}/Profile/${ID}?components=200`, {
             headers: {
                 "X-API-Key": APIKey,  
             },
@@ -87,7 +97,7 @@ class LoginForm extends Component {
                 event => this.setState({username: event.target.value})}
             ></input>
             <button className="loginBtn" onClick={event => this.usersearch(this.state.platform, this.state.username)}>Search</button>
-            {/* {this.state.users.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)} */}
+            {this.state.user.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)} */}
         </div>
     }
 }

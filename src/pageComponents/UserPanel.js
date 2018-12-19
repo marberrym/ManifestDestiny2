@@ -1,26 +1,19 @@
 import React from 'react';
 
+let platform = {
+    1: <i className="xbox xboxsmall fab fa-xbox"></i>,
+    2: <i className="ps4small ps4 fab fa-playstation"></i>,
+    4: <i className="pcsmall pc fab fa-windows"></i>
+}
+
 let UserPanel = (props) =>
-    <div className="userPanel" onClick={event => props.getProfile(2, props.user.membershipId)}>
-        <img className="profilePic" src={`https://www.bungie.net/${props.user.profilePicturePath}`} />
+    <div className="userPanel" onClick={event => props.getProfile(props.user.membershipType, props.user.membershipId)}>
+        <img className="profilePic" src={`https://www.bungie.net/${props.user.iconPath}`} />
         <div>
-            <div>{props.user.displayName}</div>
-            <div>{props.user.userTitleDisplay}</div>
-            {props.user.psnDisplayName ?
-                <div className="ps4 ps4small"><i className="ps4 fab fa-playstation"></i>{props.user.psnDisplayName}</div>
-            :
-                null
-            }
-            {props.user.xboxDisplayName ?
-                <div className="xbox xboxsmall"><i className="ps4 fab fa-xbox"></i>{props.user.xboxDisplayName}</div>
-            :
-                null
-            }
-            {props.user.blizzardDisplayName ?
-                <div className="pc pcsmall"><i className="pc fab fa-windows"></i>{props.user.blizzardDisplayName}</div>
-            :
-                null
-            }
+            <div>
+                {platform[props.user.membershipType]}
+                {props.user.displayName}
+            </div>
         </div>
     </div>
 

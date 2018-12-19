@@ -3,6 +3,14 @@
     height: 3em;
     background-color: rgba(0, 0, 0, 0.329);
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginNav {
+    margin-right: 2em;
+    color: whitesmoke;
+    cursor: pointer;
 }
 
 .ghostNav {

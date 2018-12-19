@@ -12,6 +12,7 @@ class NavBar extends Component {
     render() {
         return <div className="navBar">
             <img src="./assets/ghost.png" className="ghostNav"/>
+            <div className="loginNav">Vendors</div>
         </div>
     }
 }
