@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/loginForm.css';
+import '../stylesheets/navBar.css';
 import APIKey from '../APIKey';
 import UserPanel from './UserPanel';
 
@@ -7,10 +8,11 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             platform: -1,
             username: "",
-            users: [],
             user: [],
+            characterData: {},
         }
     }
 
@@ -23,6 +25,7 @@ class LoginForm extends Component {
     }
     
     usersearch(platform, username) {
+        this.setState({loading: true})
         fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${username}/`, {
             headers: {
                 "X-API-Key": APIKey,  
@@ -32,7 +35,7 @@ class LoginForm extends Component {
         .then(res => {
             console.log(res);
             this.setState({user: res.Response});
-            if (res.Response.length > 0) {
+            if (res.Response[0]) {
                 fetch(`https://www.bungie.net/Platform/Destiny2/${res.Response[0].membershipType}/Profile/${res.Response[0].membershipId}?components=200`,
                     {
                         headers: {
@@ -40,23 +43,15 @@ class LoginForm extends Component {
                         }
                     })
                 .then(res => res.json())
-                .then(res => console.log(res))
+                .then(res => {
+                    this.setState({loading: false})
+                    console.log(res)
+                    this.setState({characterData: res.Response.characters.data})
+                })
+            } else {
+                this.setState({loading: false})
             }
         })
-    }
-
-    getProfile(membership, ID) {
-        fetch(`https://www.bungie.net/Platform/Destiny2/${membership}/Profile/${ID}?components=200`, {
-            headers: {
-                "X-API-Key": APIKey,  
-            },
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            this.setState({user: res.Response})
-        })
-
     }
 
     render() {
@@ -97,7 +92,15 @@ class LoginForm extends Component {
                 event => this.setState({username: event.target.value})}
             ></input>
             <button className="loginBtn" onClick={event => this.usersearch(this.state.platform, this.state.username)}>Search</button>
-            {this.state.user.map(user => <UserPanel user={user} getProfile={this.getProfile}/>)} */}
+            {this.state.loading ?
+                <img src="./assets/ghost.png" className="loading"/>
+            :
+                this.state.user[0] ?
+                    <UserPanel user={this.state.user} characters={this.state.characterData}/>
+                :
+                    null
+            }
+            
         </div>
     }
 }

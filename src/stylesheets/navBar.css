@@ -13,6 +13,20 @@
     cursor: pointer;
 }
 
+.loading {
+    animation: rotate 1s infinite ease-in-out;
+    height: 5em;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
 .ghostNav {
     height: 2.5em;
     margin-left: 1em;
