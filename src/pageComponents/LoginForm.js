@@ -46,7 +46,7 @@ class LoginForm extends Component {
                 .then(res => {
                     this.setState({loading: false})
                     console.log(res)
-                    this.setState({characterData: res.Response.characters.data})
+                    this.setState({characterData: Object.values(res.Response.characters.data)})
                 })
             } else {
                 this.setState({loading: false})
@@ -96,7 +96,7 @@ class LoginForm extends Component {
                 <img src="./assets/ghost.png" className="loading"/>
             :
                 this.state.user[0] ?
-                    <UserPanel user={this.state.user} characters={this.state.characterData}/>
+                    <UserPanel user={this.state.user} characters={this.state.characterData} loading={this.state.loading}/>
                 :
                     null
             }

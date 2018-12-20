@@ -7,8 +7,6 @@ let platform = {
     4: <i className="pcsmall pc fab fa-windows"></i>
 }
 
-let chars;
-
 let UserPanel = (props) =>
     <div className="userPanel">
         <img className="profilePic" src={`https://www.bungie.net/${props.user[0].iconPath}`} />
@@ -17,16 +15,13 @@ let UserPanel = (props) =>
                 {platform[props.user[0].membershipType]}
                 {props.user[0].displayName}
             </div>
-            <div>
-                {chars = Object.values(props.characters)}
-                {console.log(chars)}
-                {props.chars ?
-                    chars.map(char => <PlayerCharacter pc={char}/>)
-                :
-                    null
-                }
-                {/* {chars.map(character => <PlayerCharacter pc={character}/>)} */}
-            </div>
+            {console.log(props.loading)}
+            {console.log(props.characters)}
+            {props.characters.length > 0 ?
+                props.characters.map(char => <PlayerCharacter char={char}/>)
+            :
+                null
+            }
         </div>
     </div>
 
