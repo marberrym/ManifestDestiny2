@@ -3,6 +3,7 @@ import '../stylesheets/loginForm.css';
 import '../stylesheets/navBar.css';
 import APIKey from '../APIKey';
 import UserPanel from './UserPanel';
+import Loading from './Loading';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -93,7 +94,7 @@ class LoginForm extends Component {
             ></input>
             <button className="loginBtn" onClick={event => this.usersearch(this.state.platform, this.state.username)}>Search</button>
             {this.state.loading ?
-                <img src="./assets/ghost.png" className="loading"/>
+                <Loading />
             :
                 this.state.user[0] ?
                     <UserPanel user={this.state.user} characters={this.state.characterData} loading={this.state.loading}/>
