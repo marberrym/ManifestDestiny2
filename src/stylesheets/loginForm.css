@@ -79,10 +79,6 @@ input {
     border-radius: 4px;
 }
 
-.userPanel:hover {
-    background-color: rgba(128, 128, 128, 0.473);
-}
-
 .ps4small {
     color: blue;
 }

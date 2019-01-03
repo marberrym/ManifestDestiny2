@@ -9,7 +9,6 @@ let platform = {
 
 let UserPanel = (props) =>
     <div className="userPanel">
-        <img className="profilePic" src={`https://www.bungie.net/${props.user[0].iconPath}`} />
         <div>
             <div>
                 {platform[props.user[0].membershipType]}
